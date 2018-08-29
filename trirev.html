@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tri-color reversi</title>
+        <script type="text/javascript" src="js/trirev.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/svg.css" />
+        <link rel="stylesheet" type="text/css" href="css/base_html.css" />
+    </head>
+    <body>
+        <svg xmlns='http://www.w3.org/2000/svg'
+            width='880' height='780' viewBox='0 0 880 780'
+            id='svg_base'>
+            <defs>
+                <g id='cell'>
+                    <circle x='0' y='0' r='30'/>
+                    <path d='M 0 22.5 C 13.5 22.5, 22.5 13.5, 22.5 0 C 22.5 -4.5, 13.5 -4.5, 13.5 0 C 13.5 9, 9 13.5, 0 13.5 C -4.5 13.5, -4.5 22.5, 0 22.5 Z' class='shadow' />
+                </g>
+            </defs>
+            <g id='backgrid'>
+            </g>
+            <g>
+                <rect x='815' y='5' width='60' height='60' rx='5' ry='5' id='nowwho'/>
+                <text x='845' y='50' text-anchor='middle'>Now</text>
+            </g>
+            <g id='score_board'>
+                <rect x='10' y='682' width='30' height='30' class='a' id='bar_a'/>
+                <text x='120' y='702' id='score_a'></text>
+                <rect x='10' y='712' width='30' height='30' class='b' id='bar_b' />
+                <text x='120' y='732' id='score_b'></text>
+                <rect x='10' y='742' width='30' height='30' class='c' id='bar_c' />
+                <text x='120' y='762' id='score_c'></text>
+                <rect x='5' y='680' width='120' height='94' rx='5' ry='5' class='score_board'/>
+            </g>
+            <g id='control'>
+                <g class='button'>
+                    <text x='875' y='740' text-anchor='middle'>PASS</text>
+                    <rect x='815' y='720' width='120' height='30' id='btn_pass' class='button'/>
+                    <line x1='815' y1='750' x2='935' y2='750' class='se' />
+                    <line x1='935' y1='720' x2='935' y2='750' class='se' />
+                    <line x1='815' y1='720' x2='935' y2='720' class='nw' />
+                    <line x1='815' y1='720' x2='815' y2='750' class='nw' />
+                </g>
+            </g>
+        </svg>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+svg {
+    background: #ddd;
+}
+.grid_line {
+    stroke: #aaa;
+    stroke-width: 1;
+}
+.none:hover { fill: #888; }
+.none { fill: #bbb; }
+.a { fill: #c88; }
+.b { fill: #8c8; }
+.c { fill: #88c; }
+#cell>.shadow {
+    fill: rgba(255, 255, 255, 0.15);
+}
+.blocked { fill: black; }
+.am {
+    animation: allmighty 3s infinite linear;
+    -webkit-animation: allmighty 3s infinite linear;
+}
+@-webkit-keyframes allmighty {
+      0% { fill: #c88; }
+     33% { fill: #8c8; }
+     66% { fill: #88c; }
+    100% { fill: #c88; }
+}
+.button>rect { fill: rgba(240, 240, 240, .2); }
+.button>line.se { stroke: #aaa; stroke-width: 2; }
+.button>line.nw { stroke: none; stroke-width: 2; }
+.button:hover>rect { fill: rgba(255, 240, 240, .2); }
+.button:hover>line.se { stroke: none; }
+.button:hover>line.nw { stroke: #aaa; }
+
+#score_board>.score_board { fill: rgba(0,0,0,0); }
+#score_board>text { textLength: 3; text-anchor: end; stroke: none; fill: none; }
+#score_board:hover>text { fill: black; }
