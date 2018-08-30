@@ -1,10 +1,12 @@
 (function() {
     window.onload = init;
     const cells = [];
+    const turnsAllMighty = 3;
     let nowWho;
     let scoreBoard;
     let c = 0;
     let strict = false;
+    let turns = 0;
 
     const lineClass = 'grid_line';
     const blankCellClass = 'none';
@@ -71,7 +73,10 @@
                 this.inTurn = (this.inTurn + 1) % 3;
                 this.show();
                 if (this.inTurn == 0) {
-                    setColorClass(10,5,blockedCellClass);
+                    turns ++;
+                    if (turns == turnsAllMighty) {
+                        setColorClass(10,5,blockedCellClass);
+                    }
                 }
             }
             show() {
