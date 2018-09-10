@@ -1,0 +1,12 @@
+{
+	"name": "tri-reversi",
+	"authors": [
+		"y-terada"
+	],
+	"dependencies": {
+		"vibe-d": "~>0.8.2"
+	},
+	"description": "Tri-color reversi server.",
+	"copyright": "Copyright © 2018, y-terada",
+	"license": "proprietary"
+}

@@ -1,0 +1,12 @@
+#entry_dialog {
+    display: none;
+}
+#entry_dialog.show {
+    display: block;
+}
+#game {
+    display: none;
+}
+#game.show {
+    display: block;
+}

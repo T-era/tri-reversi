@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tri-color reversi</title>
+        <link rel="stylesheet" type="text/css" href="css/svg.css" />
+        <link rel="stylesheet" type="text/css" href="css/base_html.css" />
+    </head>
+    <body>
+        <svg xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width='880' height='780' viewBox='-50 -50 100 100'
+            id='svg_base'>
+            <defs>
+                <g id='cell' class='a'>
+                    <circle x='0' y='0' r='30'/>
+                    <path d='M 0 22.5
+                             C 13.5 22.5, 22.5 13.5, 22.5 0
+                             C 22.5 -4.5, 13.5 -4.5, 13.5 0
+                             C 13.5 9, 9 13.5, 0 13.5
+                             C -4.5 13.5, -4.5 22.5, 0 22.5 Z' class='shadow' />
+                </g>
+            </defs>
+            <use xlink:href='#cell' transform='translate(10,10)'>
+
+            </use>
+        </svg>
+    </body>
+</html>
