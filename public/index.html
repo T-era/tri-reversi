@@ -17,6 +17,7 @@
     </div>
     <div id='game'>
         <svg xmlns='http://www.w3.org/2000/svg'
+            xmlns:xlink='http://www.w3.org/1999/xlink'
             width='880' height='780' viewBox='0 0 880 780'
             id='svg_base'>
             <defs>
@@ -24,20 +25,32 @@
                     <circle x='0' y='0' r='30'/>
                     <path d='M 0 22.5 C 13.5 22.5, 22.5 13.5, 22.5 0 C 22.5 -4.5, 13.5 -4.5, 13.5 0 C 13.5 9, 9 13.5, 0 13.5 C -4.5 13.5, -4.5 22.5, 0 22.5 Z' class='shadow' />
                 </g>
+                <clipPath id="inprogress" clipPathUnits="objectBoundingBox" >
+                    <path d="M 0.0 0 l -0.25 0, -0.5 1, 0.25 0, 0.5 -1 Z" class="curtain" />
+                    <path d="M 0.5 0 l -0.25 0, -0.5 1, 0.25 0, 0.5 -1 Z" class="curtain" />
+                    <path d="M 1.0 0 l -0.25 0, -0.5 1, 0.25 0, 0.5 -1 Z" class="curtain" />
+                    <path d="M 1.5 0 l -0.25 0, -0.5 1, 0.25 0, 0.5 -1 Z" class="curtain" />
+                </clipPath>
             </defs>
             <g id='backgrid'>
             </g>
             <g>
-                <rect x='815' y='5' width='60' height='60' rx='5' ry='5' id='nowwho'/>
-                <text x='845' y='50' text-anchor='middle'>Now</text>
+                <rect x='815' y='5' width='60' height='60' rx='5' ry='5' id='whoiam'/>
+                <g id="who_progress">
+                    <rect x='815' y='65' width='60' height='20' rx='5' ry='5' id='who'/>
+                    <rect x='815' y='65' width='60' height='20' rx='5' ry='5' class='progress' clip-path="url(#inprogress)"/>
+                </g>
             </g>
             <g id='score_board'>
                 <rect x='10' y='682' width='30' height='30' class='a' id='bar_a'/>
-                <text x='120' y='702' id='score_a'></text>
+                <text x='120' y='696' id='score_a' class='numeric'></text>
+                <text x='15' y='710' id='name_a' class='string'></text>
                 <rect x='10' y='712' width='30' height='30' class='b' id='bar_b' />
-                <text x='120' y='732' id='score_b'></text>
+                <text x='120' y='726' id='score_b' class='numeric'></text>
+                <text x='15' y='740' id='name_b' class='string'></text>
                 <rect x='10' y='742' width='30' height='30' class='c' id='bar_c' />
-                <text x='120' y='762' id='score_c'></text>
+                <text x='120' y='756' id='score_c' class='numeric'></text>
+                <text x='15' y='770' id='name_c' class='string'></text>
                 <rect x='5' y='680' width='120' height='94' rx='5' ry='5' class='score_board'/>
             </g>
             <g id='control'>

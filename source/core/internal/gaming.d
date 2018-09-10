@@ -9,9 +9,11 @@ import core.loop : LoopStatus;
 import core.game_srv : GOver, Turn, GRetire, ErrorResp;
 import core.dto.common : Player;
 import core.dto.hand_put : HandPutResp;
+import core.dto.pass : PassResp;
 import core.dto.show : ShowReq, ShowResp;
 import core.internal.converter.show_io : fromShowResp;
 import core.internal.converter.put_io : fromHandPutResp, toHandPutReq;
+import core.internal.converter.pass_io : fromPassResp, toPassReq;
 
 struct GResp {
 	LoopStatus status;
@@ -29,8 +31,11 @@ GResp gaming(scope WebSocket socket, Tid gTid, string uid, Player player) {
 			finished = true;
 		},
 		(Turn t) {
+			logInfo("send Turn");
 			socket.send(Json([
-				"class": Json("your_turn")
+				"class": Json("turn"),
+				"your": Json(t.your),
+				"nowOn": Json(to!string(t.nowOn))
 			]).to!string);
 		},
 		(GRetire r) {
@@ -57,6 +62,9 @@ GResp gaming(scope WebSocket socket, Tid gTid, string uid, Player player) {
 			logInfo("HandPut response");
 
 			socket.send(hpr.fromHandPutResp().to!string);
+		},
+		(PassResp pr) {
+			socket.send(pr.fromPassResp().to!string);
 		});
 
 	if (finished) {
@@ -74,6 +82,10 @@ GResp gaming(scope WebSocket socket, Tid gTid, string uid, Player player) {
 			case "put":
 				logInfo(format("Put request %s", request));
 				send(gTid, thisTid, toHandPutReq(player, request));
+				break;
+			case "pass":
+				logInfo("Passed");
+				send(gTid, thisTid, toPassReq(player));
 				break;
 			default:
 				throw new Exception(format("Unknown class: %s", request));

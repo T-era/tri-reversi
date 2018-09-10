@@ -32,5 +32,24 @@ svg {
 .button:hover>line.nw { stroke: #aaa; }
 
 #score_board>.score_board { fill: rgba(0,0,0,0); }
-#score_board>text { textLength: 3; text-anchor: end; stroke: none; fill: none; }
+#score_board>text.numeric { textLength: 3; text-anchor: end; stroke: none; fill: none; }
+#score_board>text.string { textLength: 3; text-anchor: start; stroke: none; fill: none; }
 #score_board:hover>text { fill: black; }
+
+.curtain {
+    animation: curtainmotion .3s infinite linear;
+    -webkit-animation: curtainmotion .3s infinite linear;
+}
+@-webkit-keyframes curtainmotion {
+      0% { transform: translateX(0); }
+    100% { transform: translateX(0.5px); }
+}
+.progress {
+    fill: rgba(255, 255, 255, 0.5);
+}
+.hide {
+    display: none;
+}
+.hide > * {
+    display: none;
+}

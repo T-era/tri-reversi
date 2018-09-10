@@ -4,13 +4,14 @@ import std.algorithm;
 import std.array;
 import vibe.vibe : Json;
 
-import core.dto.show : ShowResp, Board;
-import core.rule.init : WIDTH, HEIGHT;
+import core.dto.show : ShowResp, Board, Scores;
+import core.rule.base : WIDTH, HEIGHT;
 
 Json fromShowResp(ShowResp sr) {
 	return Json([
 		"class": Json("show"),
 		"board": fromBoard(sr.board),
+		"scores": fromScores(sr.scores)
 	]);
 }
 
@@ -22,6 +23,14 @@ Json fromBoard(Board board) {
 			ret[y] ~= [Json.emptyArray];
 			ret[y][x] = board[y][x];
 		}
+	}
+	return ret;
+}
+
+Json fromScores(Scores scores) {
+	Json ret = Json.emptyArray;
+	foreach (score; scores) {
+		ret ~= score;
 	}
 	return ret;
 }

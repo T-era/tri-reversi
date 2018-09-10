@@ -14,6 +14,8 @@ HandPutReq toHandPutReq(Player nowWho, Json json) {
 			json["to"]["y"].to!int));
 }
 
-Json fromHandPutResp(HandPutResp hsr) {
-	return Json(["put": Json("OK")]);
+Json fromHandPutResp(HandPutResp hpr) {
+	return Json([
+		"class": Json("put")
+	]);
 }

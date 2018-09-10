@@ -5,6 +5,7 @@ import vibe.vibe : logInfo;
 
 import std.concurrency : Tid, receiveTimeout;
 import std.string : format;
+import std.conv : to;
 
 import core.dto.common : Player;
 import core.matching : Matcher, Trio;
@@ -29,7 +30,8 @@ WaitingResp waiting(scope WebSocket socket, Matcher waitingSrv, string uid) {
 				"gid": Json(trio.gid),
 				"nameA": Json(trio.nameA),
 				"nameB": Json(trio.nameB),
-				"nameC": Json(trio.nameC)
+				"nameC": Json(trio.nameC),
+				"assign": Json(to!string(trio.assign)),
 			]).to!string);
 			gsTid = tid;
 			assign = trio.assign;

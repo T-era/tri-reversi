@@ -16,6 +16,7 @@ interface GameInterface {
 	Player getInTern();
 	void show(FieldShow callback);
 	void aHandPut(Player player, Position to);
+	void pass(Player player);
 }
 
 class Game : GameInterface {
@@ -34,6 +35,7 @@ class Game : GameInterface {
 	void setCallbacks(TurnChangeCallback tcc, GOverCallback goc) {
 		this.tcc = tcc;
 		this.goc = goc;
+		tcc(inTurn);
 	}
 	Player getInTern() {
 		return inTurn;
@@ -57,6 +59,13 @@ class Game : GameInterface {
 			}
 		}
 	}
+	void pass(Player player) {
+		if (player != inTurn) {
+			throw new Exception("Not your turn!");
+		} else {
+			next();
+		}
+	}
 	private void next() {
 		final switch (inTurn) {
 			case Player.A:
@@ -73,5 +82,6 @@ class Game : GameInterface {
 				}
 				break;
 		}
+		tcc(inTurn);
 	}
 }

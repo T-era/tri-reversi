@@ -6,6 +6,8 @@ var api = new (function() {
 	// listener: {
 	// 	onOpen
 	// 	onMatch
+	// 	showCallback
+	//  turnChangedCallback
 	// }
 	this.initWs = function(_listener) {
 		var baseUrl = getBaseURL();
@@ -20,14 +22,15 @@ var api = new (function() {
 		};
 		socket.onmessage = handleError(function(msgJson) {
 			console.log(msgJson);
-			var gid = msgJson.gid;
-			var nameA = msgJson.nameA;
-			var nameB = msgJson.nameB;
-			var nameC = msgJson.nameC;
+			let gid = msgJson.gid;
+			let nameA = msgJson.nameA;
+			let nameB = msgJson.nameB;
+			let nameC = msgJson.nameC;
+			let assigned = msgJson.assign;
 
 			goonQs(gid, socket);
 
-			listener.onMatch(nameA, nameB, nameC);
+			listener.onMatch(assigned, nameA, nameB, nameC);
 		});
 		socket.onopen = function() {
 			listener.onOpen();
@@ -49,54 +52,43 @@ var api = new (function() {
 			class: 'show'
 		}));
 	}
-	this.put = function(id, x, y) {
+	this.put = function(x, y) {
 		socket.send(JSON.stringify({
 			class: 'put',
-			indexInHand: index,
 			to: {
 				x: x,
 				y: y
 			}
 		}));
 	};
-	this.timer = function() {
+	this.pass = function() {
 		socket.send(JSON.stringify({
-			class: 'time'
+			class: 'pass'
 		}));
-	}
+	};
 
 
 	function goonQs(gid, socket) {
 		console.log("started");
 		socket.onmessage = handleError(function(msgJson) {
 			var cls = msgJson['class'];
-			if (cls === 'your_turn') {
+			if (cls === 'turn') {
+				console.log("Turn changed", msgJson);
+				listener.turnChangedCallback(msgJson['your'], msgJson['nowOn']);
 				api.show();
-			} else if (cls === 'reface') {
-				var answer = uitools.showConfirm('Reface ?',
-					refaceConfirmThen(true),
-					refaceConfirmThen(false));
-				function refaceConfirmThen(answer) {
-					return function() {
-						socket.send(JSON.stringify({
-							class: 'reface',
-							answer: answer
-						}));
-					}
-				}
-			} else if (cls === 'time') {
-				timer.callback(msgJson);
 			} else if (cls === 'result') {
 				uitools.showMessage(msgJson.win ? 'You win!' : 'You Lose');
 			} else if (cls === 'error') {
-				control.errorCallback(msgJson['message']);
+				alert(msgJson['message']);
+				//control.errorCallback(msgJson['message']);
 			} else if (cls === 'show'){
 				listener.showCallback(msgJson);
 			} else if (cls === 'retired') {
-				uitools.showMessage(msgJson['message']);
-			} else {
+				alert(msgJson['message']);
+//				uitools.showMessage(msgJson['message']);
+			} else if (cls === 'put') {
+				// put then redraw.
 				api.show();
-				console.log(msgJson);
 			}
 		});
 	}

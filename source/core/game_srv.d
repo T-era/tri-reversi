@@ -8,8 +8,12 @@ import core.dto.common : Player, Finished, ShuttingDown;
 import core.game : GameInterface, Game;
 import core.dto.show : show, ShowReq, ShowResp;
 import core.dto.hand_put : handPut, HandPutReq, HandPutResp;
+import core.dto.pass : pass, PassReq, PassResp;
 
-struct Turn {}
+struct Turn {
+	bool your;
+	Player nowOn;
+}
 struct ErrorResp {
 	string message;
 }
@@ -26,8 +30,9 @@ void gServer(Tid tid1, Tid tid2, Tid tid3, Tid owner) {
 
 	server.setCallbacks(
 		(Player side) {
-			Tid to = side == Player.A ? tid1 : side == Player.B ? tid2 : tid3;
-			send(to, Turn());
+			send(tid1, Turn(side == Player.A, side));
+			send(tid2, Turn(side == Player.B, side));
+			send(tid3, Turn(side == Player.C, side));
 		},
 		(Player sideWin) {
 			send(tid1, GOver(sideWin));
@@ -53,7 +58,8 @@ void gServer(Tid tid1, Tid tid2, Tid tid3, Tid owner) {
 				send(owner, r);
 			},
 			asFunc!(ShowResp, ShowReq)(server, &show),
-			asFunc!(HandPutResp, HandPutReq)(server, &handPut));
+			asFunc!(HandPutResp, HandPutReq)(server, &handPut),
+			asFunc!(PassResp, PassReq)(server, &pass));
 	}
 	logInfo("Server thread finished normally.");
 }
