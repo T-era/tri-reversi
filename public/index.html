@@ -38,8 +38,17 @@
                 <rect x='815' y='5' width='60' height='60' rx='5' ry='5' id='whoiam'/>
                 <g id="who_progress">
                     <rect x='815' y='65' width='60' height='20' rx='5' ry='5' id='who'/>
-                    <rect x='815' y='65' width='60' height='20' rx='5' ry='5' class='progress' clip-path="url(#inprogress)"/>
                 </g>
+                <g id="progress" clip-path="url(#progress_box)">
+                    <path d="M 800 65 l -15 0, -20 20, 15 0, 20 -20 Z" class="curtain progress" />
+                    <path d="M 830 65 l -15 0, -20 20, 15 0, 20 -20 Z" class="curtain progress" />
+                    <path d="M 860 65 l -15 0, -20 20, 15 0, 20 -20 Z" class="curtain progress" />
+                    <path d="M 890 65 l -15 0, -20 20, 15 0, 20 -20 Z" class="curtain progress" />
+                    <path d="M 920 65 l -15 0, -20 20, 15 0, 20 -20 Z" class="curtain progress" />
+                </g>
+                <clipPath id="progress_box">
+                    <rect x='815' y='65' width='60' height='20' rx='5' ry='5'/>
+                </clipPath>
             </g>
             <g id='score_board'>
                 <rect x='10' y='682' width='30' height='30' class='a' id='bar_a'/>
